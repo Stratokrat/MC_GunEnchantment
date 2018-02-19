@@ -7,6 +7,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.enchantment.*;
+import org.bukkit.event.inventory.PrepareItemCraftEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
 
@@ -30,6 +31,18 @@ public class Main extends JavaPlugin implements Listener {
 	
 	public void onDisable() {
 		saveConfig();
+	}
+	
+	@EventHandler(priority = EventPriority.LOWEST)
+	public void onCraft(PrepareItemCraftEvent e) {
+		String activeRecipe = e.getRecipe().toString();
+		
+		// check recipe
+		switch(activeRecipe) {
+		case "":
+			return;
+		}
+		
 	}
 	
 	@EventHandler(priority = EventPriority.LOWEST)
